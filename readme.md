@@ -30,7 +30,7 @@ Mano: Front end / some python
 Neil: Full Backend, A.I Integration, Github Maintenance
 Stratton: Backend, A.I Integration, 
 
-Creation Date: 7/26/2024 @ 1:50AM 
+Creation Date:  7/26/2024 @ 7:23 PM
 
 GIT INSTRUCTIONS:
 git init
