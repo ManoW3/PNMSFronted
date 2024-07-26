@@ -6,7 +6,7 @@ THIS IS IN A PRE-ALPHA STATE. DO NOT USE THIS IN PRODUCTION. THIS DOES NOT REPRE
 Based on the following ideas that will be available in the Google Document, further instructions/tasks will be assigned on the Jira Board.
 https://docs.google.com/document/d/1wfXWhF8yolZ5Yjtvt3zUkc-ILa4Y6C0nClKVRnsHg1I/edit?usp=sharing
 
-## Create a service that helps students from otehr countries that came to America learn english. 
+## Create a service that helps students from other countries that came to America learn english. 
 They will first start off with learning the lesson, and then as a final test, they will be speaking to an A.I. chatbot 
 that will grade their conversation and to see if they should continue on or if they need more work.
 
