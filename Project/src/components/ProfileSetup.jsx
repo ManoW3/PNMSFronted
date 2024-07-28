@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+
+
+
 const languages = [
   { code: 'es', name: 'Spanish', flag: '🇪🇸' },
   { code: 'fr', name: 'French', flag: '🇫🇷' },
@@ -17,9 +20,23 @@ const languages = [
   { code: 'nl', name: 'Dutch', flag: '🇳🇱' },
   { code: 'sv', name: 'Swedish', flag: '🇸🇪' },
   { code: 'he', name: 'Hebrew', flag: '🇮🇱' },
+  { code: 'vi', name: 'Vietnamese', flag: '🇻🇳' },
+  { code: 'ta', name: 'Tamil', flag: '🇱🇰' },
+  { code: 'be', name: 'Bengali', flag: '🇧🇩' },
+  { code: 'fi', name: 'Filipino', flag: '🇵🇭' },
+  { code: 'pu', name: 'Punjabi', flag: '🇮🇳' },
+  { code: 'so', name: 'Somali', flag: '🇸🇴' },
+  { code: 'cr', name: 'Creole', flag: '🇭🇹' },
+  { code: 'in', name: 'Indonesian', flag: '🇮🇩' },
+  { code: 'al', name: 'Albanian', flag: '🇦🇱' },
+  { code: 'ma', name: 'Mam', flag: '🇬🇹' },
+  { code: 'ur', name: 'Urdu', flag: '🇵🇰' },
+  { code: 'uk', name: 'Ukrainian', flag: '🇺🇦' },
 ];
 
+
 const experienceLevels = ['Beginner', 'Basic', 'Intermediate', 'Competent', 'Advanced', 'Expert'];
+
 
 const learningGoals = [
   { id: 'speaking', label: 'Improve Speaking' },
@@ -32,6 +49,7 @@ const learningGoals = [
   { id: 'pronunciation', label: 'Perfect Pronunciation' },
 ];
 
+
 const ProfileSetup = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [experienceLevel, setExperienceLevel] = useState(0);
@@ -39,19 +57,44 @@ const ProfileSetup = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [showGoalWarning, setShowGoalWarning] = useState(false);
   const rangeRef = useRef(null);
+  const [scrollY, setScrollY] = useState(0);
+
 
   useEffect(() => {
     setIsFormValid(selectedLanguage !== '' && selectedGoals.length >= 3);
     setShowGoalWarning(selectedGoals.length > 0 && selectedGoals.length < 3);
   }, [selectedLanguage, selectedGoals]);
 
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+
+  const getBackgroundColor = () => {
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    const scrollFraction = scrollY / maxScroll;
+    const startColor = [84, 84, 84]; // Starting Collor
+    const endColor = [175, 225, 175]; // Ending Collor
+    const resultColor = startColor.map((start, i) => Math.round(start + scrollFraction * (endColor[i] - start)));
+    return `rgb(${resultColor.join(',')})`;
+  };
+
+
   const handleGoalToggle = (goalId) => {
-    setSelectedGoals(prevGoals => 
+    setSelectedGoals(prevGoals =>
       prevGoals.includes(goalId)
         ? prevGoals.filter(id => id !== goalId)
         : [...prevGoals, goalId]
     );
   };
+
 
   const handleSaveProfile = () => {
     if (isFormValid) {
@@ -60,17 +103,22 @@ const ProfileSetup = () => {
     }
   };
 
+
   const handleRangeChange = (e) => {
     setExperienceLevel(parseInt(e.target.value));
   };
+
 
   const handleRangeMouseUp = () => {
     const closestLevel = Math.round(rangeRef.current.value);
     setExperienceLevel(closestLevel);
   };
 
+
   return (
-    <div className="min-h-screen bg-[#F2E8CF] flex justify-center p-4">
+    <div className="min-h-screen flex justify-center p-4" style={{ backgroundColor: getBackgroundColor() }}>
+
+
       <style jsx global>{`
         body {
           scrollbar-width: thin;
@@ -92,10 +140,12 @@ const ProfileSetup = () => {
         }
       `}</style>
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl my-8">
-        <h1 className="text-4xl font-bold mb-8 text-[#386641] text-center">Profile Setup</h1>
-        
+        <h1 className="text-8xl font-bold mb-8 text-[#386641] text-center">Profile Setup </h1>
+        <i class="flag flag-us"></i>
+        <i class="flag flag-poland"></i>
+        <i class="flag flag-china"></i>
         <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-[#386641]">Select your native language</h2>
+          <h2 className="text-3xl font-semibold mb-4 text-[#386641]">Select your native language</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 bg-[#f2e8cf] rounded-lg p-4">
             {languages.map((lang) => (
               <button
@@ -108,14 +158,14 @@ const ProfileSetup = () => {
                 }`}
               >
                 <span className="text-2xl mr-2">{lang.flag}</span>
-                <span className="font-medium">{lang.name}</span>
+                <span className="font-medium text-2xl">{lang.name}</span>
               </button>
             ))}
           </div>
         </div>
-        
+       
         <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-[#386641]">Your current English level</h2>
+          <h2 className="text-3xl font-semibold mb-4 text-[#386641]">Your current English level</h2>
           <input
             type="range"
             min="0"
@@ -134,9 +184,9 @@ const ProfileSetup = () => {
             ))}
           </div>
         </div>
-        
+       
         <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-[#386641]">Learning Goals (Select at least 3)</h2>
+          <h2 className="text-3xl font-semibold mb-4 text-[#386641]">Learning Goals (Select at least 3)</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {learningGoals.map((goal) => (
               <label key={goal.id} className="flex items-center space-x-2 cursor-pointer">
@@ -154,8 +204,8 @@ const ProfileSetup = () => {
             <p className="text-[#bc4749] mt-2">Please select at least 3 learning goals.</p>
           )}
         </div>
-        
-        <button 
+       
+        <button
           className={`w-full py-3 px-4 rounded-lg transition-colors text-lg font-semibold ${
             isFormValid
               ? 'bg-[#A7C957] text-white hover:bg-[#6A994E]'
@@ -174,4 +224,8 @@ const ProfileSetup = () => {
   );
 };
 
+
 export default ProfileSetup;
+
+
+
