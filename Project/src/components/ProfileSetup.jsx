@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const languages = [
   { code: 'es', name: 'Spanish', flag: '🇪🇸' },
@@ -38,6 +38,7 @@ const ProfileSetup = () => {
   const [selectedGoals, setSelectedGoals] = useState([]);
   const [isFormValid, setIsFormValid] = useState(false);
   const [showGoalWarning, setShowGoalWarning] = useState(false);
+  const rangeRef = useRef(null);
 
   useEffect(() => {
     setIsFormValid(selectedLanguage !== '' && selectedGoals.length >= 3);
@@ -57,6 +58,15 @@ const ProfileSetup = () => {
       console.log('Profile saved', { selectedLanguage, experienceLevel, selectedGoals });
       // Here you would typically send this data to your backend or perform further actions
     }
+  };
+
+  const handleRangeChange = (e) => {
+    setExperienceLevel(parseInt(e.target.value));
+  };
+
+  const handleRangeMouseUp = () => {
+    const closestLevel = Math.round(rangeRef.current.value);
+    setExperienceLevel(closestLevel);
   };
 
   return (
@@ -111,7 +121,9 @@ const ProfileSetup = () => {
             min="0"
             max="5"
             value={experienceLevel}
-            onChange={(e) => setExperienceLevel(parseInt(e.target.value))}
+            onChange={handleRangeChange}
+            onMouseUp={handleRangeMouseUp}
+            ref={rangeRef}
             className="w-full h-2 bg-[#A7C957] rounded-lg appearance-none cursor-pointer"
           />
           <div className="flex justify-between mt-2">
