@@ -160,31 +160,31 @@ function App() {
                   margin="normal"
                   required
                   fullWidth
-                  id="username"
-                  label="Username"
-                  name="username"
-                  autoComplete="off"
-                  value={formData.username}
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  value={formData.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  error={!!errors.username}
-                  helperText={errors.username}
+                  error={!!errors.email}
+                  helperText={errors.email}
                 />
               )}
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                value={formData.email}
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="off"
+                value={formData.username}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                error={!!errors.email}
-                helperText={errors.email}
+                error={!!errors.username}
+                helperText={errors.username}
               />
               <TextField
                 margin="normal"
