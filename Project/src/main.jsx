@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUp from './components/SignUp.jsx';
 import HomePage from './components/HomePage.jsx';
 import ProfileSetup from './components/ProfileSetup.jsx';
+import Chat from './components/Chat.jsx';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
