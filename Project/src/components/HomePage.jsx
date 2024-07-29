@@ -20,8 +20,35 @@ import ourMissionImage from '../assets/ourMission.jpg';
 
 const pages = ["Our Mission", "Sign In", "Contact"];
 const welcomeMessages = [
-  "Welcome", "Bienvenido", "Bienvenu", "Willkommen", "Benvenuto"
-  // ... (other welcome messages)
+  "Welcome",
+  "Bienvenido",
+  "Bienvenu",
+  "Willkommen",
+  "Benvenuto",
+  "Bem-vindo",
+  "добро пожаловать",
+  "欢迎",
+  "ようこそ",
+  "환영합니다",
+  "مرحبا",
+  "नमस्ते",
+  "Hoş geldiniz",
+  "Witaj",
+  "Welkom",
+  "Välkommen",
+  "ברוכים הבאים",
+  "Chào mừng",
+  "வரவேற்பு",
+  "স্বাগত",
+  "maligayang pagdating",
+  "ਸੁਆਗਤ ਹੈ",
+  "soo dhawoow",
+  "akeyi",
+  "selamat datang",
+  "mirëseardhje",
+  "B’a’ntulena",
+  "خوش آمدید",
+  "Ласкаво просимо"
 ];
 
 const HomePage = () => {
