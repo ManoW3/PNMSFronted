@@ -39,7 +39,7 @@ const welcomeMessages = [
   "ברוכים הבאים",
   "Chào mừng",
   "வரவேற்பு",
-  "স্বাগত",
+  "স্বাগতম",
   "maligayang pagdating",
   "ਸੁਆਗਤ ਹੈ",
   "soo dhawoow",
@@ -97,10 +97,11 @@ const HomePage = () => {
           visibility: showAppBar ? 'visible' : 'hidden',
           transition: 'opacity 0.3s ease-in-out, visibility 0.3s ease-in-out',
           borderRadius: '50px',
-          margin: '10px',
           maxWidth: 'calc(100% - 20px)',
           left: '50%',
           transform: 'translateX(-50%)',
+          right: 0,
+          top: '10px', // Move the AppBar down by 25 pixels
         }}
       >
         <Container maxWidth="xl">
@@ -122,7 +123,7 @@ const HomePage = () => {
                   textDecoration: "none",
                 }}
               >
-                LORUM
+                OpenDoor
               </Typography>
             </Box>
 
@@ -262,7 +263,7 @@ const HomePage = () => {
                   component="img"
                   height="800"
                   width="800"
-                  image={ourMissionImage} 
+                  image={ourMissionImage}
                   alt="Our Mission"
                 />
                 <CardContent sx={{ backgroundColor: darkMode ? '#2C2C2C' : '#386641' }}>
