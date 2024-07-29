@@ -18,6 +18,7 @@ import Switch from "@mui/material/Switch";
 import { useNavigate } from "react-router-dom";
 
 import ourMissionImage from "../assets/ourMission.jpg";
+import logoImage from "../assets/Logo.png";
 
 const pages = ["Our Mission", "Sign In", "Contact"];
 const welcomeMessages = [
@@ -119,13 +120,7 @@ const HomePage = () => {
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <LanguageIcon
-                sx={{
-                  display: { xs: "none", md: "flex" },
-                  mr: 1,
-                  color: darkMode ? "#fff" : "#F2E8CF",
-                }}
-              />
+            <img className = "mr-2" src={logoImage} alt="Logo" style={{ width: 30, height: 30}} />
               <Typography
                 variant="h6"
                 noWrap

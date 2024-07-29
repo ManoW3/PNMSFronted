@@ -14,6 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile-setup" element={<ProfileSetup />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </Router>
   </React.StrictMode>,

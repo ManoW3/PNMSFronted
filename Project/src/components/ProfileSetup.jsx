@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Switch from '@mui/material/Switch';
-
+import { useNavigate } from 'react-router-dom';
 
 const languages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -64,7 +64,7 @@ const ProfileSetup = () => {
   const rangeRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
   const [darkMode, setDarkMode] = useState(false);
-
+  const navigate = useNavigate();
 
   const handleThemeChange = () => {
     setDarkMode(!darkMode);
@@ -118,6 +118,7 @@ const ProfileSetup = () => {
       console.log('Profile saved', { selectedLanguage, experienceLevel, selectedGoals });
       // Here you would typically send this data to your backend or perform further actions
     }
+    navigate('/chat'); // Navigate to Chat component
   };
 
 
