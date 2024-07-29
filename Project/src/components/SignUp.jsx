@@ -32,6 +32,7 @@ function App() {
     confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(true); // State to toggle between Sign Up and Sign In
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -60,8 +61,15 @@ function App() {
         }
         break;
       case "password":
-        if (value.length < 8 || !/[A-Z]/.test(value) || !/[a-z]/.test(value) || !/\d/.test(value) || !/[!@#?\-_]/.test(value)) {
-          error = "Password must be at least 8 characters long and include a mix of uppercase and lowercase letters, numbers, and special characters (!, @, #, ?, -, _).";
+        if (
+          value.length < 8 ||
+          !/[A-Z]/.test(value) ||
+          !/[a-z]/.test(value) ||
+          !/\d/.test(value) ||
+          !/[!@#?\-_]/.test(value)
+        ) {
+          error =
+            "Password must be at least 8 characters long and include a mix of uppercase and lowercase letters, numbers, and special characters (!, @, #, ?, -, _).";
         }
         break;
       case "confirmPassword":
@@ -85,16 +93,13 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
     // Validate all fields before submission
     validateField("email", formData.email);
     validateField("username", formData.username);
     validateField("password", formData.password);
     validateField("confirmPassword", formData.confirmPassword);
-
     // Check if there are any errors
     const hasErrors = Object.values(errors).some((error) => error !== "");
-
     if (!hasErrors) {
       // Redirect to google.com if there are no errors
       window.location.href = "https://www.google.com";
@@ -105,34 +110,67 @@ function App() {
     setShowPassword(event.target.checked);
   };
 
+  const toggleFormType = () => {
+    setIsSignUp(!isSignUp);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Box
-        className="bg-slate-300"
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           minHeight: "100vh",
+          background: "linear-gradient(135deg, #F2E8CF 0%, #A6B1E1 100%)",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
+            className="bg-[#eddcf5]"
             sx={{
               marginTop: 8,
+              padding: 2,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              borderRadius: 2,
+              boxShadow: 5,
+              position: "relative",
+              zIndex: 1,
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign Up
+              {isSignUp ? "Sign Up" : "Sign In"}
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              {isSignUp && (
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoComplete="off"
+                  value={formData.username}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={!!errors.username}
+                  helperText={errors.username}
+                />
+              )}
               <TextField
                 margin="normal"
                 required
@@ -152,20 +190,6 @@ function App() {
                 margin="normal"
                 required
                 fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                autoComplete="off"
-                value={formData.username}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={!!errors.username}
-                helperText={errors.username}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
                 name="password"
                 label="Password"
                 type={showPassword ? "text" : "password"}
@@ -177,23 +201,31 @@ function App() {
                 error={!!errors.password}
                 helperText={errors.password}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="confirmPassword"
-                label="Confirm Password"
-                type={showPassword ? "text" : "password"}
-                id="confirmPassword"
-                autoComplete="current-password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={!!errors.confirmPassword}
-                helperText={errors.confirmPassword}
-              />
+              {isSignUp && (
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  type={showPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  autoComplete="current-password"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={!!errors.confirmPassword}
+                  helperText={errors.confirmPassword}
+                />
+              )}
               <FormControlLabel
-                control={<Checkbox checked={showPassword} onChange={handleShowPasswordChange} color="primary" />}
+                control={
+                  <Checkbox
+                    checked={showPassword}
+                    onChange={handleShowPasswordChange}
+                    color="primary"
+                  />
+                }
                 label="Show Password"
               />
               <Button
@@ -202,17 +234,24 @@ function App() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign Up
+                {isSignUp ? "Sign Up" : "Sign In"}
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
+                {!isSignUp && (
+                  <Grid item xs>
+                    <Link href="#" variant="body2">
+                      Forgot Password?
+                    </Link>
+                  </Grid>
+                )}
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Already have an account? Sign In"}
+                  <Typography variant="body2" display="inline">
+                    {isSignUp
+                      ? "Already have an account? "
+                      : "Don't have an account? "}
+                  </Typography>
+                  <Link href="#" variant="body2" onClick={toggleFormType}>
+                    {isSignUp ? "Sign In" : "Sign Up"}
                   </Link>
                 </Grid>
               </Grid>
