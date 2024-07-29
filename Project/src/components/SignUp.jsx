@@ -14,9 +14,12 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 
+
 const theme = createTheme();
+
 
 function App() {
   const [formData, setFormData] = useState({
@@ -33,6 +36,8 @@ function App() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(true); // State to toggle between Sign Up and Sign In
+  const navigate = useNavigate();
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -42,10 +47,12 @@ function App() {
     }));
   };
 
+
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
   };
+
 
   const validateField = (name, value) => {
     let error = "";
@@ -86,10 +93,12 @@ function App() {
     }));
   };
 
+
   const handleBlur = (event) => {
     const { name, value } = event.target;
     validateField(name, value);
   };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -101,18 +110,21 @@ function App() {
     // Check if there are any errors
     const hasErrors = Object.values(errors).some((error) => error !== "");
     if (!hasErrors) {
-      // Redirect to google.com if there are no errors
-      window.location.href = "https://www.google.com";
+      // Redirect to ProfileSetup.jsx
+      navigate("/profile-setup");
     }
   };
+
 
   const handleShowPasswordChange = (event) => {
     setShowPassword(event.target.checked);
   };
 
+
   const toggleFormType = () => {
     setIsSignUp(!isSignUp);
   };
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -237,13 +249,6 @@ function App() {
                 {isSignUp ? "Sign Up" : "Sign In"}
               </Button>
               <Grid container>
-                {!isSignUp && (
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot Password?
-                    </Link>
-                  </Grid>
-                )}
                 <Grid item>
                   <Typography variant="body2" display="inline">
                     {isSignUp
@@ -262,5 +267,6 @@ function App() {
     </ThemeProvider>
   );
 }
+
 
 export default App;

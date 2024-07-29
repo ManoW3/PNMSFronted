@@ -1,38 +1,44 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Switch from '@mui/material/Switch';
+
 
 const languages = [
-  { code: 'es', name: 'Spanish', flag: '🇪🇸' },
-  { code: 'fr', name: 'French', flag: '🇫🇷' },
-  { code: 'de', name: 'German', flag: '🇩🇪' },
-  { code: 'it', name: 'Italian', flag: '🇮🇹' },
-  { code: 'pt', name: 'Portuguese', flag: '🇵🇹' },
-  { code: 'ru', name: 'Russian', flag: '🇷🇺' },
-  { code: 'zh', name: 'Chinese', flag: '🇨🇳' },
-  { code: 'ja', name: 'Japanese', flag: '🇯🇵' },
-  { code: 'ko', name: 'Korean', flag: '🇰🇷' },
-  { code: 'ar', name: 'Arabic', flag: '🇸🇦' },
-  { code: 'hi', name: 'Hindi', flag: '🇮🇳' },
-  { code: 'tr', name: 'Turkish', flag: '🇹🇷' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'pt', name: 'Português', flag: '🇵🇹' },
+  { code: 'ru', name: 'Pусский', flag: '🇷🇺' },
+  { code: 'zh', name: '中国人', flag: '🇨🇳' },
+  { code: 'ja', name: '日本語', flag: '🇯🇵' },
+  { code: 'ko', name: '한국말', flag: '🇰🇷' },
+  { code: 'ar', name: 'عربي', flag: '🇸🇦' },
+  { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
+  { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
   { code: 'pl', name: 'Polish', flag: '🇵🇱' },
-  { code: 'nl', name: 'Dutch', flag: '🇳🇱' },
-  { code: 'sv', name: 'Swedish', flag: '🇸🇪' },
-  { code: 'he', name: 'Hebrew', flag: '🇮🇱' },
-  { code: 'vi', name: 'Vietnamese', flag: '🇻🇳' },
-  { code: 'ta', name: 'Tamil', flag: '🇱🇰' },
-  { code: 'be', name: 'Bengali', flag: '🇧🇩' },
-  { code: 'fi', name: 'Filipino', flag: '🇵🇭' },
-  { code: 'pu', name: 'Punjabi', flag: '🇮🇳' },
+  { code: 'nl', name: 'Polski', flag: '🇳🇱' },
+  { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
+  { code: 'he', name: 'עִברִית', flag: '🇮🇱' },
+  { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
+  { code: 'ta', name: 'தமிழ்', flag: '🇱🇰' },
+  { code: 'be', name: 'বাংলা', flag: '🇧🇩' },
+  { code: 'fi', name: 'Wikang Filipino', flag: '🇵🇭' },
+  { code: 'pu', name: 'ਪੰਜਾਬੀ', flag: '🇮🇳' },
   { code: 'so', name: 'Somali', flag: '🇸🇴' },
-  { code: 'cr', name: 'Creole', flag: '🇭🇹' },
-  { code: 'in', name: 'Indonesian', flag: '🇮🇩' },
-  { code: 'al', name: 'Albanian', flag: '🇦🇱' },
+  { code: 'cr', name: 'Kreyòl', flag: '🇭🇹' },
+  { code: 'in', name: 'Bahasa Indonesia', flag: '🇮🇩' },
+  { code: 'al', name: 'Shqip', flag: '🇦🇱' },
   { code: 'ma', name: 'Mam', flag: '🇬🇹' },
-  { code: 'ur', name: 'Urdu', flag: '🇵🇰' },
-  { code: 'uk', name: 'Ukrainian', flag: '🇺🇦' },
+  { code: 'ur', name: 'اردو', flag: '🇵🇰' },
+  { code: 'uk', name: 'Ukrajins’ka', flag: '🇺🇦' },
 ];
 
 
+
+
 const experienceLevels = ['Beginner', 'Basic', 'Intermediate', 'Competent', 'Advanced', 'Expert'];
+
+
 
 
 const learningGoals = [
@@ -47,6 +53,8 @@ const learningGoals = [
 ];
 
 
+
+
 const ProfileSetup = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [experienceLevel, setExperienceLevel] = useState(0);
@@ -55,6 +63,12 @@ const ProfileSetup = () => {
   const [showGoalWarning, setShowGoalWarning] = useState(false);
   const rangeRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
+  const [darkMode, setDarkMode] = useState(false);
+
+
+  const handleThemeChange = () => {
+    setDarkMode(!darkMode);
+  };
 
 
   useEffect(() => {
@@ -74,6 +88,8 @@ const ProfileSetup = () => {
   }, []);
 
 
+
+
   const getBackgroundColor = () => {
     const maxScroll = document.body.scrollHeight - window.innerHeight;
     const scrollFraction = scrollY / maxScroll;
@@ -82,6 +98,8 @@ const ProfileSetup = () => {
     const resultColor = startColor.map((start, i) => Math.round(start + scrollFraction * (endColor[i] - start)));
     return `rgb(${resultColor.join(',')})`;
   };
+
+
 
 
   const handleGoalToggle = (goalId) => {
@@ -93,6 +111,8 @@ const ProfileSetup = () => {
   };
 
 
+
+
   const handleSaveProfile = () => {
     if (isFormValid) {
       console.log('Profile saved', { selectedLanguage, experienceLevel, selectedGoals });
@@ -101,9 +121,13 @@ const ProfileSetup = () => {
   };
 
 
+
+
   const handleRangeChange = (e) => {
     setExperienceLevel(parseInt(e.target.value));
   };
+
+
 
 
   const handleRangeMouseUp = () => {
@@ -112,8 +136,12 @@ const ProfileSetup = () => {
   };
 
 
+
+
   return (
     <div className="min-h-screen flex justify-center p-4" style={{ backgroundColor: getBackgroundColor() }}>
+
+
 
 
       <style jsx global>{`
@@ -222,7 +250,6 @@ const ProfileSetup = () => {
 };
 
 
+
+
 export default ProfileSetup;
-
-
-
