@@ -11,17 +11,17 @@ import {
   Container,
   FormControlLabel,
   Checkbox,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 
-
 const theme = createTheme();
 
-
-function App() {
+function SignUp() {
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -36,8 +36,9 @@ function App() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(true); // State to toggle between Sign Up and Sign In
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const navigate = useNavigate();
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -47,12 +48,10 @@ function App() {
     }));
   };
 
-
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
   };
-
 
   const validateField = (name, value) => {
     let error = "";
@@ -93,12 +92,10 @@ function App() {
     }));
   };
 
-
   const handleBlur = (event) => {
     const { name, value } = event.target;
     validateField(name, value);
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -111,20 +108,38 @@ function App() {
     const hasErrors = Object.values(errors).some((error) => error !== "");
     if (!hasErrors) {
       // Redirect to ProfileSetup.jsx
-      navigate("/profile-setup");
+      // navigate("/profile-setup");
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("POST", "/makeaccount", false);
+      xmlHttp.setRequestHeader("Content-Type", "application/json");
+      let payload = {
+        username: formData.username,
+        password: formData.password,
+        email: formData.email,
+      };
+      xmlHttp.send(JSON.stringify(payload));
+      if (xmlHttp.responseText !== "ok") {
+        // Handle error response
+        console.error("Error creating account:", xmlHttp.responseText);
+        setSnackbarMessage(
+          "This account is already taken. Please try again."
+        );
+        setSnackbarOpen(true);
+      }
     }
   };
-
 
   const handleShowPasswordChange = (event) => {
     setShowPassword(event.target.checked);
   };
 
-
   const toggleFormType = () => {
     setIsSignUp(!isSignUp);
   };
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -264,9 +279,22 @@ function App() {
           </Box>
         </Container>
       </Box>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </ThemeProvider>
   );
 }
 
-
-export default App;
+export default SignUp;
