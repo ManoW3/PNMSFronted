@@ -14,10 +14,12 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import CardActions from '@mui/material/CardActions';
 import Switch from "@mui/material/Switch";
 import { useNavigate } from "react-router-dom";
 
 import ourMissionImage from "../assets/ourMission.jpg";
+import inclusive from "../assets/inclusive.png";
 import logoImage from "../assets/Logo.png";
 
 const pages = ["Our Mission", "Sign In", "Contact"];
@@ -285,49 +287,179 @@ const HomePage = () => {
       <Box sx={{ py: 8, backgroundColor: darkMode ? "#1E1E1E" : "#6A994E" }}>
         <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={5}>
               <Typography
-                variant="h3"
-                component="h2"
+                variant="h2"
+                component="h1"
                 gutterBottom
                 sx={{ color: "#F2E8CF", fontFamily: "fantasy" }}
               >
                 Our Mission
               </Typography>
-              <Typography variant="body1" paragraph sx={{ color: "#F2E8CF" }}>
+              <Typography variant="h5" paragraph sx={{ color: "#F2E8CF" }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
               </Typography>
-              <Typography variant="body1" paragraph sx={{ color: "#F2E8CF" }}>
+              <Typography variant="h5" paragraph sx={{ color: "#F2E8CF" }}>
                 Duis aute irure dolor in reprehenderit in voluptate velit esse
                 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                 cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum.
               </Typography>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={7}>
               <Card sx={{ maxWidth: 600, mx: "auto", boxShadow: 20 }}>
                 <CardMedia
+                  sx={{height: 350}}
                   component="img"
                   height="800"
                   width="800"
                   image={ourMissionImage}
                   alt="Our Mission"
                 />
-                <CardContent
-                  sx={{ backgroundColor: darkMode ? "#2C2C2C" : "#386641" }}
-                >
-                  <Typography variant="body2" sx={{ color: "#F2E8CF" }}>
-                    I will add content later
-                  </Typography>
-                </CardContent>
+              </Card>
+              <div style={{marginBottom: "20px"}}></div>
+              <Card sx={{ maxWidth: 600, mx: "auto", boxShadow: 20 }}>
+                <CardMedia
+                  sx={{height: 350}}
+                  component="img"
+                  width="800"
+                  image={inclusive}
+                  alt="Our Mission"
+                />
               </Card>
             </Grid>
           </Grid>
         </Container>
       </Box>
+
+
+
+      {/* Contact */}
+
+
+      <Box sx={{ py: 8, backgroundColor: darkMode ? "#121212" : "#F2E8CF" }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={4} alignItems="center">
+            <Grid item xs={11.5} md={11.5} >
+            <Typography
+                variant="h1"
+                component="h1"
+                gutterBottom
+                sx={{color: darkMode ? "#F2E8CF" : "#6A994E" , fontFamily: "fantasy" }}
+                align = "center"
+              >
+                About Us
+              </Typography>
+            </Grid>
+
+
+            <Grid item xs={12} md={6}>
+              <Card>
+                <CardMedia
+                  component="img"
+                  alt="Mano"
+                  height="40"
+                  image={inclusive}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h4" component="div" sx={{fontWeight: 'bold'}}>
+                    Mano Wertman
+                  </Typography>
+                  <Typography gutterBottom variant="h6" component="div">
+                    Frontend
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                    species, ranging across all continents except Antarctica
+                  </Typography>
+                </CardContent>
+              </Card>
+
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+
+            <Card>
+                <CardMedia
+                  component="img"
+                  alt="Pranav"
+                  height="140"
+                  image={inclusive}
+                />
+                <CardContent>
+                <Typography gutterBottom variant="h4" component="div" sx={{fontWeight: 'bold'}}>
+                    Pranav Pramod
+                  </Typography>
+                  <Typography gutterBottom variant="h6" component="div">
+                    Frontend
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                    species, ranging across all continents except Antarctica
+                  </Typography>
+                </CardContent>
+              </Card>
+
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+
+            <Card>
+                <CardMedia
+                  component="img"
+                  alt="Neil"
+                  height="140"
+                  image={inclusive}
+                />
+                <CardContent>
+                <Typography gutterBottom variant="h4" component="div" sx={{fontWeight: 'bold'}}>
+                    Neil Kumaran
+                  </Typography>
+                  <Typography gutterBottom variant="h6" component="div">
+                    AI Integration/Backend
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                    species, ranging across all continents except Antarctica
+                  </Typography>
+                </CardContent>
+              </Card>
+
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+
+            <Card>
+                <CardMedia
+                  component="img"
+                  alt="Stratton"
+                  height="140"
+                  image={inclusive}
+                />
+                <CardContent>
+                <Typography gutterBottom variant="h4" component="div" sx={{fontWeight: 'bold'}}>
+                    Stratton Jelley
+                  </Typography>
+                  <Typography gutterBottom variant="h6" component="div">
+                    Backend
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Lizards are a widespread group of squamate reptiles, with over 6,000
+                    species, ranging across all continents except Antarctica
+                  </Typography>
+                </CardContent>
+              </Card>
+
+            </Grid>
+
+          </Grid>
+        </Container>
+      </Box>
+
+      
     </Box>
   );
 };
