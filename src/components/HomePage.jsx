@@ -394,7 +394,7 @@ const HomePage = () => {
                     Pranav Pramod
                   </Typography>
                   <Typography gutterBottom variant="h6" component="div">
-                    Frontend
+                    Fullstack
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     Lizards are a widespread group of squamate reptiles, with over 6,000
