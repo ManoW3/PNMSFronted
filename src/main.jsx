@@ -5,6 +5,7 @@ import SignUp from './components/SignUp.jsx';
 import HomePage from './components/HomePage.jsx';
 import ProfileSetup from './components/ProfileSetup.jsx';
 import Chat from './components/Chat.jsx';
+import LessonScreen from './components/LessonScreen.jsx';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -17,5 +18,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/chat" element={<Chat />} />
       </Routes>
     </Router>
+    {/* <LessonScreen /> */}
   </React.StrictMode>,
 );

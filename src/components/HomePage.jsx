@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,15 +14,19 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import CardActions from '@mui/material/CardActions';
+import CardActions from "@mui/material/CardActions";
 import Switch from "@mui/material/Switch";
 import { useNavigate } from "react-router-dom";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import { Moon, Sun } from "lucide-react";
+import PranavPicture from "../assets/Pranav.jpg";
+import NeilPicture from "../assets/Neil.jpg";
 
 import ourMissionImage from "../assets/ourMission.jpg";
 import inclusive from "../assets/inclusive.png";
 import logoImage from "../assets/Logo.png";
 
-const pages = ["Our Mission", "Sign In", "Contact"];
+const pages = ["Our Mission", "Sign In", "About Us"];
 const welcomeMessages = [
   "Welcome",
   "Bienvenido",
@@ -61,6 +65,7 @@ const HomePage = () => {
   const [showAppBar, setShowAppBar] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [fade, setFade] = useState(true);
+  const [showArrow, setShowArrow] = useState(true);
 
   const navigate = useNavigate();
 
@@ -79,6 +84,19 @@ const HomePage = () => {
   const handleSignInClick = () => {
     navigate("/signup");
   };
+
+  const missionRef = useRef(null);
+
+  const handleScrollToMission = () => {
+    missionRef.current.scrollIntoView();
+  };
+
+  const contactRef = useRef(null);
+
+  const handleScrollToContact = () => {
+    contactRef.current.scrollIntoView();
+  };
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -202,7 +220,13 @@ const HomePage = () => {
                 <Button
                   key={page}
                   onClick={
-                    page === "Sign In" ? handleSignInClick : handleCloseNavMenu
+                    page === "Our Mission"
+                      ? handleScrollToMission
+                      : page === "Sign In"
+                      ? handleSignInClick
+                      : page === "About Us"
+                      ? handleScrollToContact
+                      : handleCloseNavMenu
                   }
                   sx={{
                     my: 2,
@@ -216,14 +240,19 @@ const HomePage = () => {
             </Box>
 
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Switch
-                checked={darkMode}
-                onChange={handleThemeChange}
-                color="default"
-              />
-              <Typography sx={{ ml: 1, color: darkMode ? "#fff" : "#F2E8CF" }}>
-                {darkMode ? "Dark" : "Light"}
-              </Typography>
+            <IconButton
+                onClick={handleThemeChange}
+                sx={{
+                  p: 2,
+                  borderRadius: "50%",
+                }}
+              >
+                {darkMode ? (
+                  <Sun className="w-6 h-6 text-white" />
+                ) : (
+                  <Moon className="w-6 h-6 text-[#F5F5DC]" />
+                )}
+              </IconButton>
             </Box>
           </Toolbar>
         </Container>
@@ -282,9 +311,30 @@ const HomePage = () => {
         >
           Start Learning Today
         </Button>
+
+        {showArrow && (
+          <IconButton
+            onClick={handleScrollToMission}
+            sx={{
+              mt: 3,
+              animation: "fadeInOut 2s infinite",
+              "@keyframes fadeInOut": {
+                "0%": { opacity: 0 },
+                "50%": { opacity: 1 },
+                "100%": { opacity: 0 },
+              },
+              color: darkMode ? "#fff" : "#000",
+            }}
+          >
+            <ArrowDownwardIcon sx={{ fontSize: "3rem" }} />
+          </IconButton>
+        )}
       </Box>
 
-      <Box sx={{ py: 8, backgroundColor: darkMode ? "#1E1E1E" : "#6A994E" }}>
+      <Box
+        ref={missionRef}
+        sx={{ py: 8, backgroundColor: darkMode ? "#1E1E1E" : "#6A994E" }}
+      >
         <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} md={5}>
@@ -297,22 +347,25 @@ const HomePage = () => {
                 Our Mission
               </Typography>
               <Typography variant="h5" paragraph sx={{ color: "#F2E8CF" }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                &emsp;This website was made for Refugees, seeking to escape
+                their country to come to the US. Speaking from experience,
+                language is one of the biggest barriers that students in a new
+                country face. Our goal with this website was to make English
+                accessible to everyone, no matter their age, race, economic
+                status, or country of origin through our free language learning
+                website.
               </Typography>
               <Typography variant="h5" paragraph sx={{ color: "#F2E8CF" }}>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit anim id est laborum.
+                &emsp;Using specially trained AI using OpenAI's ChatGPT, we are
+                able to build custom lessons that can cater and adapt to any
+                student's needs. This ensures that every user gets
+                top-of-the-line education for free.
               </Typography>
             </Grid>
             <Grid item xs={12} md={7}>
               <Card sx={{ maxWidth: 600, mx: "auto", boxShadow: 20 }}>
                 <CardMedia
-                  sx={{height: 350}}
+                  sx={{ height: 350 }}
                   component="img"
                   height="800"
                   width="800"
@@ -320,10 +373,10 @@ const HomePage = () => {
                   alt="Our Mission"
                 />
               </Card>
-              <div style={{marginBottom: "20px"}}></div>
+              <div style={{ marginBottom: "20px" }}></div>
               <Card sx={{ maxWidth: 600, mx: "auto", boxShadow: 20 }}>
                 <CardMedia
-                  sx={{height: 350}}
+                  sx={{ height: 350 }}
                   component="img"
                   width="800"
                   image={inclusive}
@@ -335,26 +388,27 @@ const HomePage = () => {
         </Container>
       </Box>
 
-
-
       {/* Contact */}
 
-
-      <Box sx={{ py: 8, backgroundColor: darkMode ? "#121212" : "#F2E8CF" }}>
+      <Box 
+      ref={contactRef}
+      sx={{ py: 8, backgroundColor: darkMode ? "#121212" : "#F2E8CF" }}>
         <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="center">
-            <Grid item xs={11.5} md={11.5} >
-            <Typography
+            <Grid item xs={11.5} md={11.5}>
+              <Typography
                 variant="h1"
                 component="h1"
                 gutterBottom
-                sx={{color: darkMode ? "#F2E8CF" : "#6A994E" , fontFamily: "fantasy" }}
-                align = "center"
+                sx={{
+                  color: darkMode ? "#F2E8CF" : "#6A994E",
+                  fontFamily: "fantasy",
+                }}
+                align="center"
               >
                 About Us
               </Typography>
             </Grid>
-
 
             <Grid item xs={12} md={6}>
               <Card>
@@ -365,74 +419,86 @@ const HomePage = () => {
                   image={inclusive}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h4" component="div" sx={{fontWeight: 'bold'}}>
+                  <Typography
+                    gutterBottom
+                    variant="h4"
+                    component="div"
+                    sx={{ fontWeight: "bold" }}
+                  >
                     Mano Wertman
                   </Typography>
                   <Typography gutterBottom variant="h6" component="div">
                     Frontend
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                    species, ranging across all continents except Antarctica
+                    Lizards are a widespread group of squamate reptiles, with
+                    over 6,000 species, ranging across all continents except
+                    Antarctica
                   </Typography>
                 </CardContent>
               </Card>
-
             </Grid>
 
             <Grid item xs={12} md={6}>
-
-            <Card>
+              <Card>
                 <CardMedia
                   component="img"
                   alt="Pranav"
                   height="140"
-                  image={inclusive}
+                  image={PranavPicture}
                 />
                 <CardContent>
-                <Typography gutterBottom variant="h4" component="div" sx={{fontWeight: 'bold'}}>
+                  <Typography
+                    gutterBottom
+                    variant="h4"
+                    component="div"
+                    sx={{ fontWeight: "bold" }}
+                  >
                     Pranav Pramod
                   </Typography>
                   <Typography gutterBottom variant="h6" component="div">
                     Fullstack
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                    species, ranging across all continents except Antarctica
+                    Lizards are a widespread group of squamate reptiles, with
+                    over 6,000 species, ranging across all continents except
+                    Antarctica
                   </Typography>
                 </CardContent>
               </Card>
-
             </Grid>
 
             <Grid item xs={12} md={6}>
-
-            <Card>
+              <Card>
                 <CardMedia
                   component="img"
                   alt="Neil"
                   height="140"
-                  image={inclusive}
+                  image={NeilPicture}
                 />
                 <CardContent>
-                <Typography gutterBottom variant="h4" component="div" sx={{fontWeight: 'bold'}}>
+                  <Typography
+                    gutterBottom
+                    variant="h4"
+                    component="div"
+                    sx={{ fontWeight: "bold" }}
+                  >
                     Neil Kumaran
                   </Typography>
                   <Typography gutterBottom variant="h6" component="div">
                     AI Integration/Backend
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                    species, ranging across all continents except Antarctica
+                    Lizards are a widespread group of squamate reptiles, with
+                    over 6,000 species, ranging across all continents except
+                    Antarctica
                   </Typography>
                 </CardContent>
               </Card>
-
             </Grid>
 
             <Grid item xs={12} md={6}>
-
-            <Card>
+              <Card>
                 <CardMedia
                   component="img"
                   alt="Stratton"
@@ -440,26 +506,28 @@ const HomePage = () => {
                   image={inclusive}
                 />
                 <CardContent>
-                <Typography gutterBottom variant="h4" component="div" sx={{fontWeight: 'bold'}}>
+                  <Typography
+                    gutterBottom
+                    variant="h4"
+                    component="div"
+                    sx={{ fontWeight: "bold" }}
+                  >
                     Stratton Jelley
                   </Typography>
                   <Typography gutterBottom variant="h6" component="div">
-                    Backend
+                    Gay Fagend
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                    species, ranging across all continents except Antarctica
+                    Lizards are a widespread group of squamate reptiles, with
+                    over 6,000 species, ranging across all continents except
+                    Antarctica
                   </Typography>
                 </CardContent>
               </Card>
-
             </Grid>
-
           </Grid>
         </Container>
       </Box>
-
-      
     </Box>
   );
 };
