@@ -1,6 +1,24 @@
 import React, { useState } from 'react';
 import { Send, Home, MessageCircle, Settings, User, Bell } from 'lucide-react';
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function yap(text) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "POST", "/api", false );
+  xmlHttp.setRequestHeader('Content-Type', 'application/json');
+  let payload = {
+    session: getCookie("session"),
+    text: text
+  };
+  xmlHttp.send(JSON.stringify(payload));
+  setMessages([...messages, { text: xmlHttp.responseText, sender: 'Keith' }]);
+}
+
 const ChatUI = () => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
@@ -9,6 +27,7 @@ const ChatUI = () => {
   const sendMessage = () => {
     if (inputMessage.trim() !== '') {
       setMessages([...messages, { text: inputMessage, sender: 'user' }]);
+      yap(inputMessage);
       setInputMessage('');
     }
   };
