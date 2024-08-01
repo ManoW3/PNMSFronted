@@ -1,11 +1,11 @@
-# Project Name: NOT DECIDED
+# Project Name: OpenDoor
 ## Project Description
 Created by Neil Kumaran, Mano Wertman, Pranav Pramod, and Stratton Jelley.
 
 THIS IS IN A PRE-ALPHA STATE. DO NOT USE THIS IN PRODUCTION. THIS DOES NOT REPRESENT THE FINAL PRODUCT. THIS WAS CREATED FOR A HACKATHON.
 Based on the following ideas that will be available in the Google Document, further instructions/tasks will be assigned on the Jira Board.
 https://docs.google.com/document/d/1wfXWhF8yolZ5Yjtvt3zUkc-ILa4Y6C0nClKVRnsHg1I/edit?usp=sharing
-
+*H*ello everyone
 ## Create a service that helps low-income students with a lack of resources be able to learn English in America
 They will first start off with learning the lesson, and then as a final test, they will be speaking to an A.I. chatbot 
 that will grade their conversation and to see if they should continue on or if they need more work.
@@ -26,7 +26,7 @@ that will grade their conversation and to see if they should continue on or if t
 
 ROLES/CREDIT:
 Pranav: Front end / A little backend dev
-Mano: Front end / some python			
+Mano: Front end / Python			
 Neil: Full Backend, A.I Integration, Github Maintenance
 Stratton: Backend, A.I Integration, 
 
