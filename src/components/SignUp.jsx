@@ -119,15 +119,30 @@ function SignUp() {
       if (xmlHttp.responseText !== "ok") {
         // Handle error response
         console.error("Error creating account:", xmlHttp.responseText);
-        setSnackbarMessage(
-          "This account is already taken. Please try again."
-        );
+        setSnackbarMessage("This account is already taken. Please try again.");
         setSnackbarOpen(true);
       }
-    }
-    else {
+    } else {
       // Redirect to ProfileSetup.jsx
       navigate("/profile-setup");
+    }
+  };
+
+  const signin = () => {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("POST", "/startsession", false);
+    xmlHttp.setRequestHeader("Content-Type", "application/json");
+    let payload = {
+      username: formData.username,
+      password: formData.password,
+    };
+    xmlHttp.send(JSON.stringify(payload));
+    if (xmlHttp.responseText == "badpass") {
+      alert("wrong pass (⌐_⌐)");
+    } else {
+      document.cookie =
+        "session=" + xmlHttp.responseText + "; max-age=3600; path=/";
+        alert(document.cookie);
     }
   };
 
@@ -180,7 +195,7 @@ function SignUp() {
             </Typography>
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={isSignUp ? handleSubmit : signin}
               noValidate
               sx={{ mt: 1 }}
             >
