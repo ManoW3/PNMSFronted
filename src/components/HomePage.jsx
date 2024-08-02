@@ -308,6 +308,7 @@ const HomePage = () => {
             padding: "1rem 2rem",
             minWidth: "200px",
           }}
+          onClick={() => navigate('/signup')}
         >
           Start Learning Today
         </Button>

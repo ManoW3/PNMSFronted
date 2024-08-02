@@ -99,11 +99,32 @@ function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+  
+    // Check if all fields are filled out
+    const requiredFields = ["email", "username", "password", "confirmPassword"];
+    let allFieldsFilled = true;
+    requiredFields.forEach((field) => {
+      if (!formData[field]) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [field]: `${field.charAt(0).toUpperCase() + field.slice(1)} is required`,
+        }));
+        allFieldsFilled = false;
+      }
+    });
+  
+    if (!allFieldsFilled) {
+      setSnackbarMessage("Please fill out all fields.");
+      setSnackbarOpen(true);
+      return;
+    }
+  
     // Validate all fields before submission
     validateField("email", formData.email);
     validateField("username", formData.username);
     validateField("password", formData.password);
     validateField("confirmPassword", formData.confirmPassword);
+  
     // Check if there are any errors
     const hasErrors = Object.values(errors).some((error) => error !== "");
     if (!hasErrors) {
@@ -121,10 +142,13 @@ function SignUp() {
         console.error("Error creating account:", xmlHttp.responseText);
         setSnackbarMessage("This account is already taken. Please try again.");
         setSnackbarOpen(true);
+      } else {
+        // Redirect to ProfileSetup.jsx
+        navigate("/profile-setup");
       }
     } else {
-      // Redirect to ProfileSetup.jsx
-      navigate("/profile-setup");
+      setSnackbarMessage("Please correct the errors in the form.");
+      setSnackbarOpen(true);
     }
   };
 
@@ -137,12 +161,15 @@ function SignUp() {
       password: formData.password,
     };
     xmlHttp.send(JSON.stringify(payload));
-    if (xmlHttp.responseText == "badpass") {
-      alert("wrong pass (⌐_⌐)");
+    if (xmlHttp.responseText === "badpass") {
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          Wrong pass (-_-)
+        </Alert>
+      </Snackbar>
     } else {
-      document.cookie =
-        "session=" + xmlHttp.responseText + "; max-age=3600; path=/";
-        alert(document.cookie);
+      document.cookie = "session=" + xmlHttp.responseText + "; max-age=3600;";
+      navigate("/chat");
     }
   };
 
