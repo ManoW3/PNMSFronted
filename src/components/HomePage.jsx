@@ -22,6 +22,7 @@ import { Moon, Sun } from "lucide-react";
 import PranavPicture from "../assets/Pranav.jpg";
 import NeilPicture from "../assets/Neil.jpg";
 
+import us from "../assets/us.jpg"
 import ourMissionImage from "../assets/ourMission.jpg";
 import inclusive from "../assets/inclusive.png";
 import logoImage from "../assets/Logo.png";
@@ -411,13 +412,13 @@ const HomePage = () => {
               </Typography>
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={12} sx={{justifyContent:"center"}}>
               <Card>
                 <CardMedia
                   component="img"
-                  alt="Mano"
+                  alt="All of us"
                   height="40"
-                  image={inclusive}
+                  image={us}
                 />
                 <CardContent>
                   <Typography
@@ -426,102 +427,20 @@ const HomePage = () => {
                     component="div"
                     sx={{ fontWeight: "bold" }}
                   >
-                    Mano Wertman
+                    All of us
                   </Typography>
                   <Typography gutterBottom variant="h6" component="div">
-                    Frontend
+                    Meet the team
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  alt="Pranav"
-                  height="140"
-                  image={PranavPicture}
-                />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h4"
-                    component="div"
-                    sx={{ fontWeight: "bold" }}
-                  >
-                    Pranav Pramod
-                  </Typography>
-                  <Typography gutterBottom variant="h6" component="div">
-                    Fullstack
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  alt="Neil"
-                  height="140"
-                  image={NeilPicture}
-                />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h4"
-                    component="div"
-                    sx={{ fontWeight: "bold" }}
-                  >
-                    Neil Kumaran
-                  </Typography>
-                  <Typography gutterBottom variant="h6" component="div">
-                    AI Integration/Backend
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  alt="Stratton"
-                  height="140"
-                  image={inclusive}
-                />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h4"
-                    component="div"
-                    sx={{ fontWeight: "bold" }}
-                  >
-                    Stratton Jelley
-                  </Typography>
-                  <Typography gutterBottom variant="h6" component="div">
-                    Gay Fagend
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with
-                    over 6,000 species, ranging across all continents except
-                    Antarctica
+                  <Typography variant="body1" color="text.secondary">
+                    We are a group of friends who met eachother last year during our first year of High School. 
+                    When we heard of this competition, we immediately wanted to compete (and hopefully win). 
+                    As we mentioned in our inspiration, we came up with the idea the night before the hackathon 
+                    and were exctatic when the prompt was released and we could put our ideas to life. Since that day, 
+                    we have been working on discord calls or in person for hours a day trying to perfect our website
+                    to help people become proficient in English. We hope to be able to continue this project in the future
+                    in order to help not just FGLI students, but anyone who wishes to learn English with our revolutionary 
+                    AI training and testing technologies.
                   </Typography>
                 </CardContent>
               </Card>
