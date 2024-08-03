@@ -1,15 +1,10 @@
 # Project Name: OpenDoor
 ## Project Description
-Created by Neil Kumaran, Mano Wertman, Pranav Pramod, and Stratton Jelley.
-
-THIS IS IN A PRE-ALPHA STATE. DO NOT USE THIS IN PRODUCTION. THIS DOES NOT REPRESENT THE FINAL PRODUCT. THIS WAS CREATED FOR A HACKATHON.
-Based on the following ideas that will be available in the Google Document, further instructions/tasks will be assigned on the Jira Board.
-https://docs.google.com/document/d/1wfXWhF8yolZ5Yjtvt3zUkc-ILa4Y6C0nClKVRnsHg1I/edit?usp=sharing
-**H**ello everyone
-## Create a service that helps low-income students with a lack of resources be able to learn English in America
-They will first start off with learning the lesson, and then as a final test, they will be speaking to an A.I. chatbot 
-that will grade their conversation and to see if they should continue on or if they need more work.
-
+### Create a service that helps low-income students with a lack of resources be able to learn English in America
+- An AI chatbot using ChatGPT API will teach the user a lesson based on all of their preferences and native language
+- Created by Neil Kumaran, Mano Wertman, Pranav Pramod, and Stratton Jelley.
+- Check it out here: http://44.201.156.57
+  
 ## Project Goals
 - Create a service that helps students from other countries that came to America learn english.
 - Use React, Tailwind, NodeJS, and hopefully python for the A.I. chatbot.
@@ -23,21 +18,22 @@ that will grade their conversation and to see if they should continue on or if t
 - User Progress Tracking
 - User Profile
 - User Settings
+- User Encryption
 
-ROLES/CREDIT:
-Pranav: Front end / A little backend dev
-Mano: Front end / Python			
-Neil: Full Backend, A.I Integration, Github Maintenance
-Stratton: Backend, A.I Integration, 
+## Fixes that will come in the future
+- Can have troubles with less common languages
+- Will randomly start speaking English
+- Grading flawed at times
+- Font changes based on OS
+- Flags only display on MacOS
+- Current English level slider and goal selection not fully functioning
 
-Creation Date:  7/26/2024 @ 7:23 PM
+## ROLES/CREDIT:
+- Pranav: Fullstack
+- Mano: Front End + AI Integration		
+- Neil: Back End + AI Integration
+- Stratton: Backend + Backend/Frontend Integration
+- Used AWS to host
 
-GIT INSTRUCTIONS:
-git init
-Re-initializes the git
-git add name
-git commit -m “message”
-git push origin main
-If this doesn't work git pull then run it again
-If something truly TRULY does not work, run git reset --hard origin/main (THIS WILL DELETE ALL CHANGES THAT YOU HAVE DONE, BACKUP ANY WORK YOU DID BEFORE!!!!!) 
+Creation Date:  7/26/2024 @ 7:23 PM EST
 
